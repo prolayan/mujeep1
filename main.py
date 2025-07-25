@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 import openai
 import os
@@ -14,8 +13,7 @@ def mujeeb():
     if not message:
         return jsonify({"reply": "لم أفهم، حاول مرة أخرى."}), 400
 
- completion = openai.ChatCompletion.create(
-
+    completion = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[
             {"role": "system", "content": "أنت مساعد بنكي صوتي للمكفوفين، اسمه مجيب. كن واضحًا وبسيطًا."},
@@ -23,5 +21,5 @@ def mujeeb():
         ]
     )
 
-    reply = completion.choices[0].message.content
+    reply = completion['choices'][0]['message']['content']
     return jsonify({"reply": reply})
